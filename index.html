@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gerador de Apólice de Seguro Automotivo</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<!-- Inclua a biblioteca jsPDF -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<!-- Inclua o plugin autoTable para jsPDF -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+	<div class="container mt-5">
+		<h1 class="page-title mb-3 text-center">Gerador de Apólice de Seguro Automotivo</h1>
+		<form id="apoliceForm">
+			<div class="mb-3">
+				<input type="text" class="form-control" id="nome" placeholder="Nome Completo">
+			</div>
+			<div class="mb-3">
+				<input type="text" class="form-control" id="cpf" placeholder="CPF">
+			</div>
+			<div class="mb-3">
+				<input type="email" class="form-control" id="email" placeholder="Email">
+			</div>
+			<div class="mb-3">
+				<select class="form-select" id="marcaCarro">
+					<option value="">Selecione a marca do carro</option>
+					<!-- Opções de marcas serão preenchidas via API -->
+				</select>
+			</div>
+			<div class="mb-3">
+				<select class="form-select" id="modeloCarro" disabled>
+					<option value="">Selecione o modelo do carro</option>
+					<!-- Opções de modelos serão preenchidas via API após selecionar a marca -->
+				</select>
+			</div>
+			<div class="mb-3">
+				<select class="form-select" id="ano" disabled>
+					<option value="">Selecione o ano do carro</option>
+					<!-- Opções de ano serão preenchidas via API após selecionar o modelo -->
+				</select>
+			</div>
+			<div class="container-button">
+				<button type="submit" class="generate btn btn-primary">Gerar Apólice</button>
+			</div>
+		</form>
+		<div id="apoliceResult" class="mt-4 d-none">
+			<h2>Apólice Gerada</h2>
+			<p><strong>Número da Apólice:</strong> <span id="numeroApolice"></span></p>
+			<p><strong>Nome:</strong> <span id="nomeUsuario"></span></p>
+			<p><strong>CPF:</strong> <span id="cpfUsuario"></span></p>
+			<p><strong>Email:</strong> <span id="emailUsuario"></span></p>
+			<p><strong>Marca:</strong> <span id="marcaCarroSelecionado"></span></p>
+			<p><strong>Modelo:</strong> <span id="modeloCarroSelecionado"></span></p>
+			<p><strong>Ano:</strong> <span id="anoCarroSelecionado"></span></p>
+			<p><strong>Preço FIPE:</strong> <span id="precoFipe"></span></p>
+			<p><strong>Valor do Seguro:</strong> <span id="valorSeguro"></span></p>
+			<button id="downloadPdf" class="btn btn-secondary">Baixar PDF</button>
+		</div>
+	</div>
+
+	<!-- Modal de Disclaimer -->
+	<div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="disclaimerModalLabel">Aviso de Privacidade</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Os dados fornecidos não serão armazenados ou compartilhados com terceiros. Esta aplicação é
+						apenas para fins de demonstração.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendi</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="toaster" class="toaster"></div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+	<script src="masks.js"></script> <!-- Arquivo de máscaras -->
+	<script src="script.js"></script>
+	<script src="toast.js"></script>
+</body>
+
+</html>
